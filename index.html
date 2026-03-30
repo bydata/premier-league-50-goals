@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Die 50 im Blick</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></style>
+</head>
+<body>
+
+<!-- INTRO -->
+<section id="intro">
+  <p class="intro-eyebrow">Premier-League-Torschützen</p>
+  <h1 class="intro-headline">Die <em>50</em> im Blick</h1>
+  <p class="intro-body">
+    138 Spieler haben es zwischen 1992 und 2026 geschafft, 50 Premier-League-Tore zu erzielen. Doch wie schnell man
+    dieses Ziel erreicht, trennt erfolgreiche Stürmer von Ausnahmeerscheinungen. Hier sind fünf herausragende Premier-League-Stürmer.
+  </p>
+  <div class="scroll-cue">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M2 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Scrollen zum Erkunden
+  </div>
+</section>
+
+<!-- STORY -->
+<div id="story">
+
+  <!-- sticky chart -->
+  <div class="sticky-graphic">
+    <div id="chart-wrap">
+      <svg id="chart"></svg>
+      <div id="legend">
+        <div class="legend-item" id="leg-cole" style="display:none">
+          <div class="legend-swatch" style="background:var(--cole)"></div> Cole
+        </div>
+        <div class="legend-item" id="leg-shearer" style="display:none">
+          <div class="legend-swatch" style="background:var(--shearer)"></div> Shearer
+        </div>
+        <div class="legend-item" id="leg-haaland" style="display:none">
+          <div class="legend-swatch" style="background:var(--haaland)"></div> Haaland
+        </div>
+        <div class="legend-item" id="leg-salah" style="display:none">
+          <div class="legend-swatch" style="background:var(--salah)"></div> Salah
+        </div>
+        <div class="legend-item" id="leg-kane" style="display:none">
+          <div class="legend-swatch" style="background:var(--kane)"></div> Kane
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- text steps -->
+  <div class="steps-wrap">
+
+    <div class="step" data-step="0">
+      <div class="step-card">
+        <span class="tag tag-cole">Andy Cole · 1992–2008</span>
+        <h2>Ein 30 Jahre alter Rekord</h2>
+        <p>Andy Cole setzte früh den Maßstab für Torjäger in der Premier League. Er erreichte
+           <strong>50 Tore in 65 Spielen</strong> — ein Rekord, der fast drei Jahrzehnte
+           Bestand haben sollte.</p>
+        <div class="stat-row">
+          <div class="stat-item">
+            <span class="stat-val" style="color:var(--cole)">65</span>
+            <span class="stat-lbl">Spiele</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val" style="color:var(--cole)">0,77</span>
+            <span class="stat-lbl">Tore / Spiel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step="1">
+      <div class="step-card">
+        <span class="tag tag-shearer">Alan Shearer · 1992–2006</span>
+        <h2>Der ewige Rekordtorschütze</h2>
+        <p>Alan Shearer beendete seine Karriere mit <strong>260 Premier-League-Toren</strong> —
+           ein Rekord, der bis heute gilt. Seine 50-Tore-Marke erreichte er in <strong>67 Spielen</strong>,
+           nur zwei mehr als Cole.</p>
+        <div class="stat-row">
+          <div class="stat-item">
+            <span class="stat-val" style="color:var(--shearer)">67</span>
+            <span class="stat-lbl">Spiele</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val" style="color:var(--shearer)">0,75</span>
+            <span class="stat-lbl">Tore / Spiel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step="2">
+      <div class="step-card">
+        <span class="tag tag-salah">Mohamed Salah · 2017–</span>
+        <h2>Der aktive Rekordhalter</h2>
+        <p>Mohamed Salah ist der treffsicherste aktive Spieler in der Premier League.
+           Er benötigte <strong>72 Spiele</strong> um 50 Tore zu erzielen — eine bemerkenswerte Quote
+           für einen Außenstürmer. Allerdings hatte er einen langsamen Start beim FC Chelsea. 
+           Erst nach einer zweijährigen Zwischenstation in Italien begann er beim FC Liverpool,
+           die Rolle des modernen Flügelspielers neu definieren.</p>
+        <div class="stat-row">
+          <div class="stat-item">
+            <span class="stat-val" style="color:var(--salah)">72</span>
+            <span class="stat-lbl">Spiele</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val" style="color:var(--salah)">0,69</span>
+            <span class="stat-lbl">Tore / Spiel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step="3">
+      <div class="step-card">
+        <span class="tag tag-kane">Harry Kane · 2012–2023</span>
+        <h2>So nah dran</h2>
+        <p>Harry Kane brauchte <strong>86 Spiele</strong>, um 50 Tore zu erzielen. Als er 2023 zu Bayern München wechselte,
+           fehlten ihm nur noch <strong>47 Tore</strong> auf Shearers Allzeit-Rekord von 260 Premier-League-Toren.
+           In diesem Tempo hätten zwei zusätzliche Saisons in der Premier League vermutlich gereicht.</p>
+        <div class="stat-row">
+          <div class="stat-item">
+            <span class="stat-val" style="color:var(--kane)">86</span>
+            <span class="stat-lbl">Spiele bis 50 Tore</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val" style="color:var(--kane)">47</span>
+            <span class="stat-lbl">Tore zum Rekord</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="step" data-step="4">
+      <div class="step-card">
+        <span class="tag tag-haaland">Erling Haaland · 2022–</span>
+        <h2>Von einem anderen Stern</h2>
+        <p>Als Erling Haaland 2022 zu Manchester City wechselte, schrieb er die Geschichtsbücher um.
+           <strong>50 Tore in nur 48 Spielen</strong> — mehr als ein Tor pro Spiel, und
+           17 schneller als Coles langjähriger Rekord.</p>
+        <div class="stat-row">
+          <div class="stat-item">
+            <span class="stat-val" style="color:var(--haaland)">48</span>
+            <span class="stat-lbl">Spiele</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val" style="color:var(--haaland)">1,04</span>
+            <span class="stat-lbl">Tore / Spiel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OUTRO -->
+<section id="outro">
+  <h2>50 Tore. Fünf Geschichten.</h2>
+  <p>Daten: FBRef.com &nbsp;·&nbsp; Visualisierung: Ansgar Wolsing, Cédric Scherer, Kristin Baumann</p>
+</section>
+
+<script src="script.js" ></script>
+
+</body>
+</html>
+
+
+<!-- wenn spieler gezeigt, dann schwarz oder secondary red, danach farbe ausfaden -->
