@@ -36,7 +36,7 @@ df_long |>
     plot.margin = margin(t = 4, r = 4, b = 4, l = 4)
   )
 ggsave(file.path("drafts", "plots", "goal-progressions-overlapping-dots.png"),
-  width = 5, height = 5)
+  width = 5, height = 3)
 
 
 # Heatmap-like
@@ -59,5 +59,5 @@ df_long |>
     plot.margin = margin(t = 4, r = 4, b = 4, l = 4)
   )
 ggsave(file.path("drafts", "plots", "goal-progressions-filled-squares.png"),
-  width = 5, height = 5)
+  width = 5, height = 3)
   
