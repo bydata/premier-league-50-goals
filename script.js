@@ -166,7 +166,7 @@ const ANNOTATIONS = [
   {
     step: 6, panel: 'haaland', bins: [0], targetBin: 0,
     labelSide: 'right', labelOffsetX: 10, labelOffsetY: 30, bowX: -12,
-    label: ['Nur in jedem dritten Spiel', 'blieb Haaland torlos.'],
+    label: ['Nur in einem von drei Spielen', 'blieb Haaland damals torlos.'],
   },
   {
     step: 7, panel: 'haaland', bins: [0, 1], targetBin: 1,
