@@ -222,15 +222,10 @@ export function showPlayer(key, animate = true) {
       .duration(400)
       .style("opacity", 1);
   }
-  const legEl = document.getElementById(`leg-${key}`);
-  if (legEl) legEl.style.display = "flex";
-  document.getElementById("legend").classList.add("visible");
 }
 
 export function hidePlayer(key) {
   ["line", "dot", "lbl", "sub", "lbl-line"].forEach((t) =>
     d3.select(`#${t}-${key}`).style("opacity", 0),
   );
-  const legEl = document.getElementById(`leg-${key}`);
-  if (legEl) legEl.style.display = "none";
 }

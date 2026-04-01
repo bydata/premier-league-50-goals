@@ -18,7 +18,7 @@ function applyStep(step, animate = true) {
   currentStep = step;
   const lineWrap = d3.select("#linechart-wrap");
   const histoWrap = d3.select("#histogram-wrap");
-  if (step <= 4) {
+  if (step <= 5) {
     lineWrap
       .style("display", "block")
       .transition()
