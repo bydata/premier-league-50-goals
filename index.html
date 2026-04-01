@@ -17,7 +17,7 @@
   <h1 class="intro-headline">Die <em>50</em> im Blick</h1>
   <p class="intro-body">
     138 Spieler haben es zwischen 1992 und 2026 geschafft, 50 Premier-League-Tore zu erzielen. Doch wie schnell man
-    dieses Ziel erreicht, trennt erfolgreiche Stürmer von Ausnahmeerscheinungen. Hier sind fünf herausragende Premier-League-Stürmer.
+    dieses Ziel erreicht, trennt erfolgreiche Stürmer von Ausnahmeerscheinungen. Wir stellen fünf herausragende Premier-League-Stürmer auf ihrem “Weg zur 50” vor.
   </p>
   <div class="scroll-cue">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M2 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -50,6 +50,7 @@
         </div>
       </div>
     </div>
+    <div id="histogram-wrap" style="display:none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; max-width: 900px;"></div>
   </div>
 
   <!-- text steps -->
@@ -137,12 +138,11 @@
       </div>
     </div>
 
-
     <div class="step" data-step="4">
       <div class="step-card">
         <span class="tag tag-haaland">Erling Haaland · 2022–</span>
         <h2>Von einem anderen Stern</h2>
-        <p>Als Erling Haaland 2022 zu Manchester City wechselte, schrieb er die Geschichtsbücher um.
+        <p>Als <b class="haaland-highlight">Erling Haaland</b> 2022 zu Manchester City wechselte, schrieb er die Geschichtsbücher um.
            <strong>50 Tore in nur 48 Spielen</strong> — mehr als ein Tor pro Spiel, und
            17 schneller als Coles langjähriger Rekord.</p>
         <div class="stat-row">
@@ -158,8 +158,70 @@
       </div>
     </div>
 
+    <!-- hacky way to show step chart for longer (same as wit hhistogram later) -->
+     <div class="step" data-step="5"></div>
+    
+    <div class="step" data-step="5">
+      <div class="step-card">
+        <span class="tag" style="background:var(--haaland); color:white;">Analyse</span>
+        <h2>Wie macht Haaland das nur?!</h2>
+        <p>Schauen wir uns nun mal an, wie oft die Spieler in einem Spiel getroffen haben:</p>
+      </div>
+    </div>
+    
+    <div class="step" data-step="6">
+      <div class="step-card">
+        <span class="tag" style="background:var(--haaland); color:white;">Erling Haaland</span>
+        <h2>Exzellenter Torriecher</h2>
+        <p style="margin-bottom:12px;">Hier wird deutlich: <b class="haaland-highlight">Haaland bleibt vergleichsweise selten torlos</b>: nur in einem Drittel der Spiele geht er leer aus.</p>
+        <p>Das bedeutet auch: <b>in der Mehrheit (67%) der Spiele trifft er mindestens einmal ins Tor.</b></p>
+      </div>
+    </div>
+    
+    <div class="step" data-step="7"></div>
+
+    <div class="step" data-step="8">
+      <div class="step-card">
+        <span class="tag" style="background:var(--haaland); color:white;">Erling Haaland</span>
+        <h2>Die Dreierpack-Maschine</h2>
+        <p>Haaland benötigte die wenigsten Spiele — aber <b class="haaland-highlight">schießt mit Abstand am häufigsten 3 Tore</b> auf seinem Weg. In 5 von 48 Spielen gelang ihm dies; Kane kommt lediglich auf 3 in 86 Spielen.</p>
+      </div>
+    </div>
+
+    <div class="step" data-step="9">
+      <!--
+      <div class="step-card">
+        <span class="tag" style="background:var(--haaland); color:white;">Erling Haaland</span>
+        <h2>Dabei bleibt es</h2>
+        <p>Dreierpacks scheint er zu lieben — ein viertes Tor ist ihm in diesem Zeitraum jedoch nie gelungen.</p>
+      </div>
+    -->
+    </div>
+
+    <div class="step" data-step="10">
+      <div class="step-card">
+        <span class="tag" style="background:var(--cole); color:white;">Andy Cole</span>
+        <h2>Die Cole Show</h2>
+        <p style="margin-bottom:12px;">Andrew Cole traf beim 9:0 gegen Ipswich Town im Jahr 1995 fünf Mal. Damit ist er <b>der erste Spieler, dem fünf oder mehr Tore in einem Premier League Spiel gelangen.</b></p>
+        <p>Ihm folgten später Shearer (im Jahr 1999), Defoe (2009), Berbatov (2010) und Agüero (2015).</p>
+      </div>
+    </div>
+
+
+
+    <div class="step" data-step="11">
+      <div class="step-card">
+        <span class="tag" style="background:var(--haaland); color:white;">Jetzt sind Sie dran!</span>
+        <h2>Erkundungstour</h2>
+        <p>Bewegen Sie die Maus über die Balken, um zu erfahren, wie die einzelnen Spieler im Vergleich abschneiden.</p>
+      </div>
+    </div>
+    <div class="step" data-step="12"></div>
+
   </div>
 </div>
+
+    
 
 <!-- OUTRO -->
 <section id="outro">
