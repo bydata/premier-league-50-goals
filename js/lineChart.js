@@ -20,20 +20,38 @@ export function initLineChart() {
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
+  // X Axis with grid lines and tick labels
+  const xTicks = [20, 40, 60, 80];
+  const xAxis = g
+    .append("g")
+    .attr("transform", `translate(0,${iH})`)
+    .call(d3.axisBottom(x).tickValues(xTicks).tickSize(0).tickPadding(10));
+  xAxis.select(".domain").attr("class", "axis-line");
+  xAxis.selectAll("text").attr("class", "tick-text");
+
   g.append("g")
     .attr("class", "grid-x")
     .selectAll("line")
-    .data([25, 50, 75])
+    .data(xTicks)
     .join("line")
     .attr("class", "grid-line")
     .attr("x1", (d) => x(d))
     .attr("x2", (d) => x(d))
     .attr("y1", 0)
     .attr("y2", iH);
+
+  const yTicks = [10, 20, 30, 40, 50];
+
+  // Y Axis with grid lines and tick labels
+  const yAxis = g
+    .append("g")
+    .call(d3.axisLeft(y).tickValues(yTicks).tickSize(0).tickPadding(10));
+  yAxis.select(".domain").attr("class", "axis-line");
+  yAxis.selectAll("text").attr("class", "tick-text");
   g.append("g")
     .attr("class", "grid-y")
     .selectAll("line")
-    .data([10, 20, 30, 40, 50])
+    .data(yTicks)
     .join("line")
     .attr("class", "grid-line")
     .attr("x1", 0)
@@ -41,25 +59,7 @@ export function initLineChart() {
     .attr("y1", (d) => y(d))
     .attr("y2", (d) => y(d));
 
-  const xAxis = g
-    .append("g")
-    .attr("transform", `translate(0,${iH})`)
-    .call(d3.axisBottom(x).ticks(5).tickSize(0).tickPadding(10));
-  xAxis.select(".domain").attr("class", "axis-line");
-  xAxis.selectAll("text").attr("class", "tick-text");
-
-  const yAxis = g
-    .append("g")
-    .call(
-      d3
-        .axisLeft(y)
-        .tickValues([10, 20, 30, 40, 50])
-        .tickSize(0)
-        .tickPadding(10),
-    );
-  yAxis.select(".domain").attr("class", "axis-line");
-  yAxis.selectAll("text").attr("class", "tick-text");
-
+  // Axis labels
   g.append("text")
     .attr("class", "axis-label")
     .attr("x", iW / 2)
@@ -74,6 +74,7 @@ export function initLineChart() {
     .attr("text-anchor", "middle")
     .text("Tore (kumuliert)");
 
+  // 50 goals annotation (line + label)
   g.append("line")
     .attr("x1", 0)
     .attr("x2", iW)
