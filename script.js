@@ -171,7 +171,7 @@ const ANNOTATIONS = [
   {
     step: 7, panel: 'haaland', bins: [0, 1], targetBin: 1,
     labelSide: 'right', labelOffsetX: 10, labelOffsetY: 0, bowX: -12,
-    label: ['Tatsächlich traf er sogar', 'häufiger ein Mal', 'das Tor als gar nicht!'],
+    label: ['Tatsächlich traf er', 'sogar häufiger ein Mal', 'ins Tor als gar nicht!'],
   },
   {
     step: 8, panel: 'haaland', bins: [3], targetBin: 3,
@@ -293,7 +293,8 @@ function initHistogram() {
 
   const haalandData = allPlayers.find(p => p.key === 'haaland');
   const restData    = allPlayers.filter(p => p.key !== 'haaland');
-  const xBinLabels  = [...d3.range(HISTO_MAX_BIN).map(String), `${HISTO_MAX_BIN}+`];
+  /* const xBinLabels  = [...d3.range(HISTO_MAX_BIN).map(String), `${HISTO_MAX_BIN}`]+; */
+  const xBinLabels  = [...d3.range(HISTO_MAX_BIN).map(String), `${HISTO_MAX_BIN}`];
 
   histoWrap.style.cssText += 'display:block;';
 
@@ -464,9 +465,10 @@ function initHistogram() {
             .attr('fill', barD => barD.bin === bin ? bc : d3.interpolateRgb(bc, '#ffffff')(0.75))
             .attr('opacity', 1);
         });
-        const binLabel = bin === HISTO_MAX_BIN
+        /* const binLabel = bin === HISTO_MAX_BIN
           ? `${HISTO_MAX_BIN}+ Tore in einem Spiel`
-          : `${bin} Tor${bin !== 1 ? 'e' : ''} in einem Spiel`;
+          : `${bin} Tor${bin !== 1 ? 'e' : ''} in einem Spiel`; */
+        const binLabel = `${bin} Tor${bin !== 1 ? 'e' : ''} in einem Spiel`;
         const rows = [..._panels]
           .sort((a, b) => {
             const ca = a.binData.find(bd => bd.bin === bin)?.count || 0;
