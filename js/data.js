@@ -40,18 +40,34 @@ export const players = {
     color: "var(--cole)",
     label: "Cole",
     matches: 65,
+    linechart: {
+      pathLabelText: "Sp.",
+      offsetLabel: {
+        x: -16,
+      },
+    },
   },
   shearer: {
     data: clipAt50(rawData.shearer),
     color: "var(--shearer)",
     label: "Shearer",
     matches: 67,
+    linechart: {
+      showLabelLine: true,
+      pathLabelText: "Sp.",
+      offsetLabel: {
+        y: -16,
+      },
+    },
   },
   salah: {
     data: clipAt50(rawData.salah),
     color: "var(--salah)",
     label: "Salah",
     matches: 72,
+    linechart: {
+      pathLabelText: "Sp.",
+    },
   },
   haaland: {
     data: clipAt50(rawData.haaland),

@@ -373,8 +373,8 @@ body::before {
 }
 
 .player-label {
-  font-family: Impact, "Arial Narrow", Arial, sans-serif;
-  font-weight: 400;
+  font-family: var(--font-condensed);
+  font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.05em;
   text-transform: uppercase;

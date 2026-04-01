@@ -12,7 +12,7 @@ export function initLineChart() {
   // set up viz dimensions
   width = wrap.clientWidth;
   height = wrap.clientHeight;
-  margin = { top: 30, right: 80, bottom: 50, left: 48 };
+  margin = { top: 30, right: 20, bottom: 50, left: 48 };
   innerWidth = width - margin.left - margin.right;
   innerHeight = height - margin.top - margin.bottom;
 
@@ -47,7 +47,7 @@ export function initLineChart() {
     .attr("y2", innerHeight);
 
   // Y Axis with grid lines and tick labels
-  const yTicks = [10, 20, 30, 40, 50];
+  const yTicks = [10, 20, 30, 40];
   const yAxis = group
     .append("g")
     .call(d3.axisLeft(yScale).tickValues(yTicks).tickSize(0).tickPadding(10));
@@ -102,32 +102,45 @@ export function initLineChart() {
     .attr("letter-spacing", ".12em")
     .text("50 TORE");
 
+  const playersGroup = group.append("g").attr("class", "players-group");
+
   // prepare line, dot and label elements for each player (initially hidden)
   Object.keys(players).forEach((key) => {
-    group
+    const individualPlayerGroup = playersGroup
+      .append("g")
+      .attr("id", `group-${key}`);
+
+    individualPlayerGroup
       .append("path")
       .attr("id", `line-${key}`)
       .attr("class", "goal-line")
       .attr("stroke", players[key].color)
       .attr("d", "M0,0")
       .style("opacity", 0);
-    group
+    individualPlayerGroup
       .append("circle")
       .attr("id", `dot-${key}`)
       .attr("class", "end-dot")
       .attr("fill", players[key].color)
       .style("opacity", 0);
-    group
+    individualPlayerGroup
       .append("text")
       .attr("id", `lbl-${key}`)
       .attr("class", "player-label")
       .attr("fill", players[key].color)
       .style("opacity", 0);
-    group
+    individualPlayerGroup
       .append("text")
       .attr("id", `sub-${key}`)
       .attr("class", "goal-rate-label")
       .attr("fill", "var(--muted)")
+      .style("opacity", 0);
+    individualPlayerGroup
+      .append("line")
+      .attr("id", `lbl-line-${key}`)
+      .attr("class", "player-label-line")
+      .attr("stroke", "var(--muted)")
+      .attr("stroke-width", 0.5)
       .style("opacity", 0);
   });
 }
@@ -139,6 +152,8 @@ const lineGen = (pts) =>
     .y((pt) => yScale(pt[1]))
     .curve(d3.curveStep)(pts);
 
+// animate player elements appearing one by one, with line drawing animation for the path
+// configuration per player (e.g. label position) can be set in the data.js file
 export function showPlayer(key, animate = true) {
   const p = players[key];
   const last = p.data[p.data.length - 1];
@@ -162,11 +177,11 @@ export function showPlayer(key, animate = true) {
           .attr("stroke-dashoffset", null),
       );
   }
-  const lx = xScale(last[0]) + 8,
-    ly = yScale(last[1]);
+  const lx = xScale(last[0]) + (p.linechart?.offsetLabel?.x || 0),
+    ly = yScale(last[1]) - 24 + (p.linechart?.offsetLabel?.y || 0);
   const delay = animate ? 1300 : 0;
   d3.select(`#dot-${key}`)
-    .attr("cx", xScale(last[0]))
+    .attr("cx", xScale(last[0]) - 3)
     .attr("cy", yScale(last[1]))
     .style("opacity", 0)
     .transition()
@@ -175,8 +190,9 @@ export function showPlayer(key, animate = true) {
     .style("opacity", 1);
   d3.select(`#lbl-${key}`)
     .attr("x", lx)
-    .attr("y", ly - 4)
-    .attr("font-size", 13)
+    .attr("y", ly)
+    .attr("font-size", 14)
+    .attr("text-anchor", "middle")
     .text(p.label)
     .style("opacity", 0)
     .transition()
@@ -186,20 +202,33 @@ export function showPlayer(key, animate = true) {
   d3.select(`#sub-${key}`)
     .attr("x", lx)
     .attr("y", ly + 12)
-    .attr("font-size", 10)
-    .text(`${p.matches} Spiele`)
+    .attr("font-size", 12)
+    .attr("text-anchor", "middle")
+    .text(`${p.matches} ${p.linechart?.pathLabelText || "Spiele"}`)
     .style("opacity", 0)
     .transition()
     .delay(delay)
     .duration(400)
     .style("opacity", 1);
+  if (p.linechart?.showLabelLine) {
+    d3.select(`#lbl-line-${key}`)
+      .attr("x1", xScale(last[0]) - 3)
+      .attr("y1", ly + 12 + 4)
+      .attr("x2", xScale(last[0]) - 3)
+      .attr("y2", yScale(last[1]) - 8)
+      .style("opacity", 0)
+      .transition()
+      .delay(delay)
+      .duration(400)
+      .style("opacity", 1);
+  }
   const legEl = document.getElementById(`leg-${key}`);
   if (legEl) legEl.style.display = "flex";
   document.getElementById("legend").classList.add("visible");
 }
 
 export function hidePlayer(key) {
-  ["line", "dot", "lbl", "sub"].forEach((t) =>
+  ["line", "dot", "lbl", "sub", "lbl-line"].forEach((t) =>
     d3.select(`#${t}-${key}`).style("opacity", 0),
   );
   const legEl = document.getElementById(`leg-${key}`);
