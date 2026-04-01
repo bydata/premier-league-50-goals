@@ -220,7 +220,9 @@ function showPlayer(key, animate = true) {
   const p = players[key];
   const last = p.data[p.data.length - 1];
   const pathEl = document.getElementById(`line-${key}`);
+
   d3.select(`#line-${key}`).attr("d", lineGen(p.data)).style("opacity", 1);
+
   if (animate) {
     const len = pathEl.getTotalLength();
     d3.select(`#line-${key}`)
@@ -822,15 +824,12 @@ function setHistogramAnnotation(step) {
 
 let currentStep = -1;
 const stateForStep = [
-  ["cole"],
-  ["cole", "shearer"],
-  ["cole", "shearer", "salah"],
-  ["cole", "shearer", "salah", "kane"],
-  ["cole", "shearer", "salah", "kane", "haaland"],
-  ["cole", "shearer", "salah", "kane", "haaland"],
-  ["cole", "shearer", "salah", "kane", "haaland"],
-  ["cole", "shearer", "salah", "kane", "haaland"],
-  ["cole", "shearer", "salah", "kane", "haaland"],
+  ["cole"], // 0
+  ["cole", "shearer"], // 1
+  ["cole", "shearer", "salah"], // 2
+  ["cole", "shearer", "salah", "kane"], // 3
+  ["cole", "shearer", "salah", "kane", "haaland"], // 4
+  ["cole", "shearer", "salah", "kane", "haaland"], // 5
 ];
 
 function applyStep(step, animate = true) {
