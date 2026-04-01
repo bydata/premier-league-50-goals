@@ -4,112 +4,127 @@ import { players } from "./data.js";
 
 const svg = d3.select("#linechart");
 const wrap = document.getElementById("linechart-wrap");
-let W, H, margin, iW, iH, x, y, g;
+let width, height, margin, innerWidth, innerHeight, xScale, yScale, group;
 
 export function initLineChart() {
   svg.selectAll("*").remove();
-  W = wrap.clientWidth;
-  H = wrap.clientHeight;
+
+  // set up viz dimensions
+  width = wrap.clientWidth;
+  height = wrap.clientHeight;
   margin = { top: 30, right: 80, bottom: 50, left: 48 };
-  iW = W - margin.left - margin.right;
-  iH = H - margin.top - margin.bottom;
-  svg.attr("viewBox", `0 0 ${W} ${H}`);
-  x = d3.scaleLinear().domain([0, 90]).range([0, iW]);
-  y = d3.scaleLinear().domain([0, 54]).range([iH, 0]);
-  g = svg
+  innerWidth = width - margin.left - margin.right;
+  innerHeight = height - margin.top - margin.bottom;
+
+  // set up scales
+  xScale = d3.scaleLinear().domain([0, 90]).range([0, innerWidth]);
+  yScale = d3.scaleLinear().domain([0, 54]).range([innerHeight, 0]);
+
+  // set up SVG and main group
+  svg.attr("viewBox", `0 0 ${width} ${height}`);
+  group = svg
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
   // X Axis with grid lines and tick labels
   const xTicks = [20, 40, 60, 80];
-  const xAxis = g
+  const xAxis = group
     .append("g")
-    .attr("transform", `translate(0,${iH})`)
-    .call(d3.axisBottom(x).tickValues(xTicks).tickSize(0).tickPadding(10));
+    .attr("transform", `translate(0,${innerHeight})`)
+    .call(d3.axisBottom(xScale).tickValues(xTicks).tickSize(0).tickPadding(10));
   xAxis.select(".domain").attr("class", "axis-line");
   xAxis.selectAll("text").attr("class", "tick-text");
-
-  g.append("g")
+  group
+    .append("g")
     .attr("class", "grid-x")
     .selectAll("line")
     .data(xTicks)
     .join("line")
     .attr("class", "grid-line")
-    .attr("x1", (d) => x(d))
-    .attr("x2", (d) => x(d))
+    .attr("x1", (d) => xScale(d))
+    .attr("x2", (d) => xScale(d))
     .attr("y1", 0)
-    .attr("y2", iH);
-
-  const yTicks = [10, 20, 30, 40, 50];
+    .attr("y2", innerHeight);
 
   // Y Axis with grid lines and tick labels
-  const yAxis = g
+  const yTicks = [10, 20, 30, 40, 50];
+  const yAxis = group
     .append("g")
-    .call(d3.axisLeft(y).tickValues(yTicks).tickSize(0).tickPadding(10));
+    .call(d3.axisLeft(yScale).tickValues(yTicks).tickSize(0).tickPadding(10));
   yAxis.select(".domain").attr("class", "axis-line");
   yAxis.selectAll("text").attr("class", "tick-text");
-  g.append("g")
+  group
+    .append("g")
     .attr("class", "grid-y")
     .selectAll("line")
     .data(yTicks)
     .join("line")
     .attr("class", "grid-line")
     .attr("x1", 0)
-    .attr("x2", iW)
-    .attr("y1", (d) => y(d))
-    .attr("y2", (d) => y(d));
+    .attr("x2", innerWidth)
+    .attr("y1", (d) => yScale(d))
+    .attr("y2", (d) => yScale(d));
 
   // Axis labels
-  g.append("text")
+  group
+    .append("text")
     .attr("class", "axis-label")
-    .attr("x", iW / 2)
-    .attr("y", iH + 42)
+    .attr("x", innerWidth / 2)
+    .attr("y", innerHeight + 42)
     .attr("text-anchor", "middle")
     .text("Gespielte Partien");
-  g.append("text")
+  group
+    .append("text")
     .attr("class", "axis-label")
     .attr("transform", "rotate(-90)")
-    .attr("x", -iH / 2)
+    .attr("x", -innerHeight / 2)
     .attr("y", -38)
     .attr("text-anchor", "middle")
     .text("Tore (kumuliert)");
 
   // 50 goals annotation (line + label)
-  g.append("line")
+  group
+    .append("line")
     .attr("x1", 0)
-    .attr("x2", iW)
-    .attr("y1", y(50))
-    .attr("y2", y(50))
+    .attr("x2", innerWidth)
+    .attr("y1", yScale(50))
+    .attr("y2", yScale(50))
     .attr("stroke", "rgba(204,0,0,0.25)")
     .attr("stroke-width", 1)
     .attr("stroke-dasharray", "6 4");
-  g.append("text")
+  group
+    .append("text")
     .attr("x", 4)
-    .attr("y", y(50) - 6)
+    .attr("y", yScale(50) - 6)
     .attr("fill", "rgba(204,0,0,0.50)")
     .attr("font-family", "Impact, Arial Narrow, sans-serif")
     .attr("font-size", 10)
     .attr("letter-spacing", ".12em")
     .text("50 TORE");
 
-  ["cole", "shearer", "salah", "kane", "haaland"].forEach((key) => {
-    g.append("path")
+  // prepare line, dot and label elements for each player (initially hidden)
+  Object.keys(players).forEach((key) => {
+    group
+      .append("path")
       .attr("id", `line-${key}`)
       .attr("class", "goal-line")
       .attr("stroke", players[key].color)
       .attr("d", "M0,0")
       .style("opacity", 0);
-    g.append("circle")
+    group
+      .append("circle")
       .attr("id", `dot-${key}`)
       .attr("class", "end-dot")
       .attr("fill", players[key].color)
       .style("opacity", 0);
-    g.append("text")
+    group
+      .append("text")
       .attr("id", `lbl-${key}`)
       .attr("class", "player-label")
       .attr("fill", players[key].color)
       .style("opacity", 0);
-    g.append("text")
+    group
+      .append("text")
       .attr("id", `sub-${key}`)
       .attr("class", "goal-rate-label")
       .attr("fill", "var(--muted)")
@@ -120,8 +135,8 @@ export function initLineChart() {
 const lineGen = (pts) =>
   d3
     .line()
-    .x((pt) => x(pt[0]))
-    .y((pt) => y(pt[1]))
+    .x((pt) => xScale(pt[0]))
+    .y((pt) => yScale(pt[1]))
     .curve(d3.curveStep)(pts);
 
 export function showPlayer(key, animate = true) {
@@ -147,12 +162,12 @@ export function showPlayer(key, animate = true) {
           .attr("stroke-dashoffset", null),
       );
   }
-  const lx = x(last[0]) + 8,
-    ly = y(last[1]);
+  const lx = xScale(last[0]) + 8,
+    ly = yScale(last[1]);
   const delay = animate ? 1300 : 0;
   d3.select(`#dot-${key}`)
-    .attr("cx", x(last[0]))
-    .attr("cy", y(last[1]))
+    .attr("cx", xScale(last[0]))
+    .attr("cy", yScale(last[1]))
     .style("opacity", 0)
     .transition()
     .delay(delay)
