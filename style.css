@@ -453,11 +453,6 @@ body::before {
   z-index: 1;
 }
 
-.haaland-red {
-  color: #c00;
-  font-weight: bold;
-}
-
 /* ── HISTOGRAM FONT INHERITANCE ──────────────────────────────────────────*/
 
 #histogram-wrap {
