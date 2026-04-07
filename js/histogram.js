@@ -440,7 +440,9 @@ export function initHistogram() {
       .attr("height", (d) => dim.IH - yScale(d.count))
       .attr("fill", baseColor)
       .attr("opacity", 1)
-      .attr("rx", 1.5);
+      .attr("rx", 1.5)
+      .style("cursor", "pointer")
+      .style("transition", "fill 0.3s, opacity 0.3s");
 
     const annG = pg
       .append("g")
