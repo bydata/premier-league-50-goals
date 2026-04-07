@@ -157,6 +157,7 @@ body::before {
 #story {
   position: relative;
   background: var(--bg);
+  padding: 0 1em;
 }
 
 .sticky-graphic {
@@ -227,6 +228,7 @@ body::before {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   position: relative;
   z-index: 20;
+  opacity: 0.95;
 }
 
 .step-card .tag {
