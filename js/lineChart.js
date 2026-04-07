@@ -226,6 +226,6 @@ export function showPlayer(key, animate = true) {
 
 export function hidePlayer(key) {
   ["line", "dot", "lbl", "sub", "lbl-line"].forEach((t) =>
-    d3.select(`#${t}-${key}`).style("opacity", 0),
+    d3.select(`#${t}-${key}`).transition().duration(300).style("opacity", 0),
   );
 }

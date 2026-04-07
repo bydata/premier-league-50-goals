@@ -18,13 +18,21 @@ function applyStep(step, animate = true) {
   currentStep = step;
   const lineWrap = d3.select("#linechart-wrap");
   const histoWrap = d3.select("#histogram-wrap");
-  if (step <= 5) {
+
+  if (step < 0) {
+    // intro step
+    ["cole", "shearer", "salah", "kane", "haaland"].forEach((key) => {
+      hidePlayer(key);
+    });
+    histoWrap.style("display", "none").style("opacity", 0);
+  } else if (step >= 0 && step <= 5) {
+    // line chart steps
     lineWrap
       .style("display", "block")
       .transition()
-      .duration(500)
+      .duration(300)
       .style("opacity", 1);
-    histoWrap.style("display", "none").style("opacity", 0);
+    histoWrap.transition().duration(300).style("opacity", 0);
     const desired = stateForStep[step] || [];
     ["cole", "shearer", "salah", "kane", "haaland"].forEach((key) => {
       const isVisible = d3.select(`#line-${key}`).style("opacity") !== "0";
@@ -32,11 +40,13 @@ function applyStep(step, animate = true) {
       else if (!desired.includes(key) && isVisible) hidePlayer(key);
     });
   } else {
-    lineWrap.style("display", "none").style("opacity", 0);
+    // histogram steps
+    lineWrap.transition().duration(300).style("opacity", 0);
     histoWrap
       .style("display", "block")
       .transition()
-      .duration(500)
+      .duration(400)
+      .delay(300)
       .style("opacity", 1);
     setHistogramAnnotation(step);
   }
@@ -55,6 +65,12 @@ function setupObserver() {
     { rootMargin: "-35% 0px -35% 0px", threshold: 0 },
   );
   steps.forEach((s) => obs.observe(s));
+
+  const intro = document.querySelector("#intro");
+  if (intro) {
+    intro.dataset.step = "-1";
+    obs.observe(intro);
+  }
 }
 
 // ── MAIN ──────────────────────────────────────────────────────────────────

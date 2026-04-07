@@ -177,6 +177,7 @@ body::before {
   border-top: 3px solid var(--main-color);
   padding: 8px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  z-index: 1;
 }
 
 #linechart-wrap svg {
@@ -401,41 +402,6 @@ body::before {
   stroke-width: 1;
 }
 
-#legend {
-  visibility: hidden;
-  position: absolute;
-  bottom: -28px;
-  right: 0;
-  display: flex;
-  gap: 1.2rem;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-
-#legend.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: "Arial Narrow", Arial, sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.legend-swatch {
-  width: 18px;
-  height: 3px;
-  border-radius: 0;
-}
-
 #histogram-wrap {
   display: none;
   opacity: 0;
@@ -444,11 +410,6 @@ body::before {
   top: 0;
   left: 0;
   width: 100%;
-  transition: opacity 0.5s ease;
-  z-index: 1;
-}
-
-#linechart-wrap {
   transition: opacity 0.5s ease;
   z-index: 1;
 }
