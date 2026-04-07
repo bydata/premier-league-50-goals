@@ -25,7 +25,7 @@
   --muted-lt: #999;
   --muted-xlt: #ccc;
 
-  --grid: rgba(0, 0, 0, 0.06);
+  --grid: rgba(0, 0, 0, 0.1);
 
   --other-player: #888888;
   --cole: var(--other-player);
@@ -33,6 +33,13 @@
   --salah: var(--other-player);
   --kane: var(--other-player);
   --haaland: var(--main-color);
+
+  --font-headline:
+    Impact, "Arial Narrow", Arial, sans-serif; /* fallback for Knockout */
+  --font-body:
+    "Source Serif 4", Cambria, Times, Arial, sans-serif; /* fallback for Tiempos */
+  --font-condensed:
+    "Archivo Narrow", "Arial Narrow", Arial, sans-serif; /* fallback for Ringside Condensed */
 }
 
 html {
@@ -40,9 +47,6 @@ html {
 }
 
 body {
-  --font-headline: "Knockout 50", Impact, "Arial Narrow", Arial, sans-serif;
-  --font-body: "Ringside Narrow", Cambria, Times, Arial, sans-serif;
-  --font-condensed: "Ringside Condensed", "Arial Narrow", Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
@@ -90,12 +94,11 @@ body::before {
 
 .intro-eyebrow {
   font-family: var(--font-condensed);
-  font-size: clamp(10px, 1.1vw, 12px);
+  font-size: clamp(10px, 1.1vw, 14px);
   letter-spacing: 0.2em;
-  text-transform: uppercase;
   color: var(--main-color);
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .intro-headline {
@@ -119,8 +122,9 @@ body::before {
   max-width: 52ch;
   font-size: clamp(14px, 1.3vw, 16px);
   line-height: 1.65;
-  color: var(--muted);
+  color: var(--text);
   margin-bottom: 2.5rem;
+  font-family: var(--font-body);
 }
 
 .scroll-cue {
@@ -130,13 +134,13 @@ body::before {
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--muted-lt);
+  color: var(--muted);
   font-weight: 600;
   animation: nudge 2.4s ease-in-out infinite;
 }
 
 .scroll-cue svg {
-  opacity: 0.5;
+  opacity: 0.9;
   color: var(--main-color);
 }
 
@@ -351,15 +355,16 @@ body::before {
 }
 
 .tick-text {
-  fill: var(--muted-lt);
-  font-family: "Arial", sans-serif;
-  font-size: 11px;
+  fill: var(--muted);
+  font-family: var(--font-condensed);
+  letter-spacing: 0.12em;
+  font-size: 12px;
   font-weight: 500;
 }
 
 .axis-label {
   fill: var(--muted);
-  font-family: "Arial Narrow", Arial, sans-serif;
+  font-family: var(--font-condensed);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -375,9 +380,9 @@ body::before {
 
 .player-label {
   font-family: var(--font-condensed);
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.05em;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -391,8 +396,9 @@ body::before {
 }
 
 .goal-rate-label {
-  font-family: Arial, sans-serif;
-  font-size: 10px;
+  font-family: var(--font-condensed);
+  letter-spacing: 0.12em;
+  font-size: 12px;
   font-weight: 500;
   fill: var(--muted-lt);
 }
@@ -418,10 +424,6 @@ body::before {
 
 #histogram-wrap {
   font-family: var(--font-body);
-}
-
-#histogram-wrap div {
-  font-family: inherit;
 }
 
 #histogram-wrap svg text {

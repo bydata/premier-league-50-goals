@@ -340,7 +340,7 @@ export function initHistogram() {
     const nameEl = document.createElement("div");
     Object.assign(nameEl.style, {
       fontSize: isHero ? "17px" : "15px",
-      fontWeight: "600",
+      fontWeight: "900",
       fontFamily: "var(--font-condensed)",
       color: H_COLOR_TEXT,
       lineHeight: "1.2",
@@ -351,7 +351,7 @@ export function initHistogram() {
 
     const avgEl = document.createElement("div");
     Object.assign(avgEl.style, {
-      fontSize: "11px",
+      fontSize: "12px",
       fontFamily: "var(--font-condensed)",
       color: H_COLOR_MUTED,
       marginTop: "2px",

@@ -89,17 +89,18 @@ export function initLineChart() {
     .attr("x2", innerWidth)
     .attr("y1", yScale(50))
     .attr("y2", yScale(50))
-    .attr("stroke", "rgba(204,0,0,0.25)")
+    .attr("stroke", "rgba(204,0,0,0.75)")
     .attr("stroke-width", 1)
     .attr("stroke-dasharray", "6 4");
   group
     .append("text")
     .attr("x", 4)
     .attr("y", yScale(50) - 6)
-    .attr("fill", "rgba(204,0,0,0.50)")
-    .attr("font-family", "Impact, Arial Narrow, sans-serif")
-    .attr("font-size", 10)
+    .attr("fill", "var(--main-color)")
+    .attr("font-family", "var(--font-condensed)")
+    .attr("font-size", 14)
     .attr("letter-spacing", ".12em")
+    .attr("font-weight", 700)
     .text("50 TORE");
 
   const playersGroup = group.append("g").attr("class", "players-group");
